@@ -1,7 +1,7 @@
 <?php
     $_cx = array(
         'host'=>'localhost',
-        'user'=>'jason',
+        'user'=>'root',
         'password'=>'',
         'db'=>'bestof'
     )

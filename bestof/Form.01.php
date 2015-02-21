@@ -191,6 +191,28 @@ Class Form
 		}
 		return $rtn;
 	}
+        
+    /// Acceps the query and passes back the Input Select options.
+    /// $query :: query ex: "select seq as value ,name as title from helpdesk.appequip where type = 'App'"
+    /// $val :: value to check for selected
+    /// $sql :: datalayer
+    /// Example:
+    /// $fw = new FrameWork();                      
+    /// echo $fw->InputSelect("select seq as value ,name as title from helpdesk.appequip where type = 'App' order by name",$row['app'],$dataset); 
+    public function InputSelect($query,$val,$sql) 
+    {
+      
+        $rtn = "";
+        
+        $sql->Query($query);
+        while ($app = $sql->NextRecord())
+        {
+            $rtn .= '<option value="'.$app['value'].'" '.( $app['value'] == $val ? 'selected' : '' ).' >'.$app['title'].'</option>';
+
+        }        
+        return $rtn;                                                      
+        
+    }
 	
 	
 }
