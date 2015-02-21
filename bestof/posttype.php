@@ -47,6 +47,23 @@ if($sql->HasErr)
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <style> 
+        #content, #data
+        {
+            width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            
+        }
+        label
+            {
+                width:125px;
+                display:block;
+                text-align: right;
+                float: left;
+                padding-right: 10px;
+            }
+        </style>
         <title></title>
     </head>
     <body>

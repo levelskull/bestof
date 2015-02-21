@@ -27,11 +27,28 @@ if (isset($_POST['user']) and $_POST['user'] != '' and isset($_POST['pass']) and
         <title>Best Of Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style> 
+        #content
+        {
+            width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            
+        }
+        label
+            {
+                width:125px;
+                display:block;
+                text-align: right;
+                float: left;
+                padding-right: 10px;
+            }
+        </style>
     </head>
     <body>
         <div id="content">
             <form name="login" action="" method="post">
-                <lable>User:</lable><input type="text" name="user" id="user" value="<?php echo isset($_POST['user']) ? $_POST['user'] : '' ; ?>" /><br>
+                <label>User:</label><input type="text" name="user" id="user" value="<?php echo isset($_POST['user']) ? $_POST['user'] : '' ; ?>" /><br>
                 <label>Password:</label><input type="password" name="pass" id="pass" /><br>
                 <label>&nbsp;</label><input type="submit" name="Submit" id="Submit" />
             </form>
