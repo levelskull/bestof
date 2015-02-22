@@ -10,9 +10,9 @@ include_once("security.php");       // check to see if the user is logged in
     <body>
         <ul>
             <li><a href="posttype.php">Post Type</a></li>
-            <li>Navigation Tag</li>
-            <li>Content</li>
-            <li>Purchase Type</li>
+            <li><a href="navtype.php">Navigation Tag</a></li>
+            <li><a href="content.php">Content </a></li>
+            <li><a href="purchase.php">Purchase Type</a></li>
         </ul>
     </body>
 </html>
