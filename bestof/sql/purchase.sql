@@ -1,5 +1,5 @@
 
-CREATE  TABLE `bestof`.`pruchase` (
+CREATE  TABLE `bestof`.`purchase` (
   `seq` INT NOT NULL AUTO_INCREMENT ,
   `content_seq` INT NULL ,
   `pur_type` INT NULL ,

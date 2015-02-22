@@ -5,7 +5,7 @@ CREATE  TABLE `bestof`.`content` (
   `nav_tag` INT NULL ,
   `prodlink` VARCHAR(150) NULL ,
   `title` VARCHAR(125) NULL ,
-  `arthor` VARCHAR(45) NULL ,
+  `author` VARCHAR(45) NULL ,
   `release_date` DATE NULL ,
   `wk_spent` INT NULL ,
   `content` TEXT NULL ,
