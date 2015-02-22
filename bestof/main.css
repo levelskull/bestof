@@ -1,0 +1,91 @@
+/* 
+    Document   : main
+    Created on : Feb 22, 2015, 10:07:21 AM
+    Author     : christopherdelph
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+body
+{
+    font-family: 'Open Sans', sans-serif;
+    width: 768px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #F1F1F1;
+    background-repeat: no-repeat;
+
+}
+#pageHeader
+{
+    font-size: 1em;
+    text-align: right;
+    border-bottom: 1px #00FF00  solid;
+    height:1.25em;
+
+}
+#pageFooter
+{
+    font-size: xx-small;
+    text-align: center;
+}
+nav
+{
+    font-size: 2em;
+    text-align: center;
+    margin:15px;
+}
+section
+{
+
+    padding:5px;
+    margin:5px;
+
+}
+section header
+{
+    font-size: 3em;
+    color:#AAAAAA;
+
+}
+article
+{
+    border-bottom: 1px #FF3300 solid;
+    padding:5px;
+    overflow: hidden;
+}
+article header
+{
+    font-size: 1.5em;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+article .infoBox
+{
+    margin-left: 10px;
+    width:300px;
+    float:left;
+}
+article .prodBox
+{
+    width:425px;
+    float:left;
+    text-align: left;
+}
+label
+{
+    width:125px;
+    display:block;
+    text-align: right;
+    float: left;
+    padding-right: 10px;
+}
+#featurePic
+{
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

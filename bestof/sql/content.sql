@@ -1,12 +1,17 @@
+delimiter $$
 
-CREATE  TABLE `bestof`.`content` (
-  `seq` INT NOT NULL AUTO_INCREMENT ,
-  `post_type` INT NULL ,
-  `nav_tag` INT NULL ,
-  `prodlink` VARCHAR(150) NULL ,
-  `title` VARCHAR(125) NULL ,
-  `author` VARCHAR(45) NULL ,
-  `release_date` DATE NULL ,
-  `wk_spent` INT NULL ,
-  `content` TEXT NULL ,
-  PRIMARY KEY (`seq`) );
+CREATE TABLE `content` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `post_type` int(11) DEFAULT NULL,
+  `nav_tag` int(11) DEFAULT NULL,
+  `prodlink` varchar(150) DEFAULT NULL,
+  `title` varchar(125) DEFAULT NULL,
+  `author` varchar(45) DEFAULT NULL,
+  `release_date` date DEFAULT NULL,
+  `wk_spent` int(11) DEFAULT NULL,
+  `content` text,
+  `yr` int(4) DEFAULT NULL,
+  `showdte` varchar(4) DEFAULT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1$$
+

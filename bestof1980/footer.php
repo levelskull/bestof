@@ -1,0 +1,1 @@
+<footer id='pageFooter'>Copyright 2015</footer>
