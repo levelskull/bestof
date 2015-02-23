@@ -67,7 +67,7 @@ Eum reque convenire at. Ne graece praesent neglegentur duo, ex error omittam nam
                     <?php echo $row['release_date'] != '' ? '<label>Release Date:</label>'.$row['release_date'].'<br>' : ''; ?>
                     <?php echo $row['wk_spent'] != '' ? '<label>Weeks Spent at #1:</label>'.$row['wk_spent'].'<br>' : ''; ?>
                     <br>
-                    Purchase at :
+                    Get it here :
                     <ul>
                         <li>Amazon</li>
                         <li>iTunes</li>
