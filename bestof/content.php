@@ -51,14 +51,14 @@ if($sql->HasErr)
          <style> 
         #content, #data
         {
-            width: 550px;
+            width: 900px;
             margin-left: auto;
             margin-right: auto;
             
         }
         label
             {
-                width:125px;
+                width:200px;
                 display:block;
                 text-align: right;
                 float: left;
@@ -78,9 +78,13 @@ if($sql->HasErr)
                 <label>Nav Tag</label><select name="nav_tag" id="nav_tag">
                   <?php echo $fw->InputSelect("SELECT name as title, seq as value  FROM nav_tag;",isset($page_values['nav_tag']) ? $page_values['nav_tag'] : '',$sql); ?>
             </select><br>
-                <label>Product Link</label><input type="text" name="prodlink" id="prodlink" value="<?php echo isset($page_values['prodlink']) ? $page_values['prodlink'] : '' ; ?>" /><br>
-                <label>Title</label><input type="text" name="title" id="title" value="<?php echo isset($page_values['title']) ? $page_values['title'] : '' ; ?>" /><br>
-                <label>Author</label><input type="text" name="author" id="author" value="<?php echo isset($page_values['author']) ? $page_values['author'] : '' ; ?>" /><br>
+            
+            <label>Year (YYYY)</label><input type="text" name="yr" id="yr" value="<?php echo isset($page_values['yr']) ? $page_values['yr'] : '' ; ?>" /><br>
+            <label>Post Date (MMDD)</label><input type="text" name="showdte" id="showdte" value="<?php echo isset($page_values['showdte']) ? $page_values['showdte'] : '' ; ?>" /><br>
+            
+            <label>Product Link</label><input type="text" name="prodlink" id="prodlink" size='85'  value="<?php echo isset($page_values['prodlink']) ? htmlentities($page_values['prodlink']) : '' ; ?>" /><br>
+                <label>Title</label><input type="text" name="title" id="title" size='85'  value="<?php echo isset($page_values['title']) ? $page_values['title'] : '' ; ?>" /><br>
+                <label>Author</label><input type="text" name="author" id="author" size='85'  value="<?php echo isset($page_values['author']) ? $page_values['author'] : '' ; ?>" /><br>
                 <label>Release Date</label><input type="text" name="release_date" id="release_date" value="<?php echo isset($page_values['release_date']) ? $fw->MySQLToDate($page_values['release_date']) : '' ; ?>" /><br>
                 <label>Week Spent #1</label><input type="text" name="wk_spent" id="wk_spent" value="<?php echo isset($page_values['wk_spent']) ? $page_values['wk_spent'] : '' ; ?>" /><br>
                 <label>Content</label><br>

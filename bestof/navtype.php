@@ -24,7 +24,7 @@ if (isset($_POST['Submit']))
     $nbr = $form->Save($insert);
     if ($form->Error['HasError'])
         die($form->Error['Message']);
-    header("location:navtype.php?edit=".$nbr);
+    header("location:navtype.php");
 }
 
 if (isset($_REQUEST['edit']))

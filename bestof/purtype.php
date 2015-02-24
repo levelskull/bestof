@@ -71,8 +71,10 @@ if($sql->HasErr)
         <div id="content">
             <form name="login" action="" method="post">
                 <input type="hidden" name="seq" id="seq" value="<?php echo isset($page_values['seq']) ? $page_values['seq'] : '' ; ?>" /><br>
-                <label>Order</label><input type="text" name="ord" id="ord" value="<?php echo isset($page_values['ord']) ? $page_values['ord'] : '' ; ?>" /><br>
+                
                 <label>Name</label><input type="text" name="name" id="name" value="<?php echo isset($page_values['name']) ? $page_values['name'] : '' ; ?>" /><br>
+                <label>Icon</label><input type="text" name="icon" id="icon" value="<?php echo isset($page_values['icon']) ? $page_values['icon'] : '' ; ?>" /><br>
+                <label>Cert</label><input type="text" name="cert" id="cert" value="<?php echo isset($page_values['cert']) ? $page_values['cert'] : '' ; ?>" /><br>
                 <label>&nbsp;</label><input type="submit" name="Submit" id="Submit" />
             </form>
         </div>
@@ -84,7 +86,7 @@ if($sql->HasErr)
                     <th>Name</th>
                 </tr>
                 <?php
-                    $query = "select * from nav_tag order by name";
+                    $query = "select * from pur_type order by name";
                     $sql->Query($query);
                     if($sql->HasErr)
                         die("Unable to query [01] :: ".$sql->ErrMsg);
@@ -93,8 +95,8 @@ if($sql->HasErr)
                     {
                         echo "<tr>";
                         echo '<td><a href="?edit='.$row['seq'].'">Edit</a></td>';
-                        echo "<td>".$row['ord']."</td>";
                         echo "<td>".$row['name']."</td>";
+                    
                         echo "</tr>";
                         
                     }
