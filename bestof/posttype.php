@@ -24,7 +24,7 @@ if (isset($_POST['Submit']))
     $nbr = $form->Save($insert);
     if ($form->Error['HasError'])
         die($form->Error['Message']);
-    header("location:posttype.php?edit=".$nbr);
+    header("location:posttype.php");
 }
 
 if (isset($_REQUEST['edit']))

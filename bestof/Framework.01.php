@@ -64,6 +64,7 @@ Class FrameWork
         $rtn = '0000-00-00';
         if ($date != '' and trim($date) != '')
         {
+            date_default_timezone_set ( 'America/New_York' );
             $d =  date_create_from_format('m/d/Y',$date);
             return date_format($d,'Y-m-d');
         }
@@ -89,4 +90,4 @@ Class FrameWork
 	
 }
  
-?> 
+?>

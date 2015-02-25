@@ -130,26 +130,3 @@ Class InsertStatementMySQL
 		
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

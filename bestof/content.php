@@ -1,10 +1,10 @@
 <?php
-include_once("security.php");       // check to see if the user is logged in
-include_once('cx.php');         // connection string
-include_once('MySQL.01.php');   // datalayer
-include_once('Form.01.php');    // form
-include_once('CreateInsertMySQL.01.php');   // create the insert statement
-include_once("Framework.01.php");   // generic functions
+include_once("../bestof/security.php");       // check to see if the user is logged in
+include_once('../bestof/cx.php');         // connection string
+include_once('../bestof/MySQL.01.php');   // datalayer
+include_once('../bestof/Form.01.php');    // form
+include_once('../bestof/CreateInsertMySQL.01.php');   // create the insert statement
+include_once("../bestof/Framework.01.php");   // generic functions
 
 $sql = new MySQL($_cx['host'],$_cx['user'],$_cx['password'],$_cx['db']);    // setup datalayer
 $_key = "seq";
@@ -18,7 +18,7 @@ if (isset($_POST['Submit']))
 {
     $save = new InsertStatementMYSQL($fw);     // new insert on duplicate update statement
     $save->Ignore(array('Submit'));      // values to ignore
-    $save->Date(array('release_date')); // dates
+    //$save->Date(array('release_date')); // dates
     $save->Table($_table);                     // table name -> top
     $save->Key($_key);                         // primmary key -> top
     $insert = $save->CreateInsert($_POST);               // get the insert statement
@@ -82,10 +82,10 @@ if($sql->HasErr)
             <label>Year (YYYY)</label><input type="text" name="yr" id="yr" value="<?php echo isset($page_values['yr']) ? $page_values['yr'] : '' ; ?>" /><br>
             <label>Post Date (MMDD)</label><input type="text" name="showdte" id="showdte" value="<?php echo isset($page_values['showdte']) ? $page_values['showdte'] : '' ; ?>" /><br>
             
-            <label>Product Link</label><input type="text" name="prodlink" id="prodlink" size='85'  value="<?php echo isset($page_values['prodlink']) ? htmlentities($page_values['prodlink']) : '' ; ?>" /><br>
+                <label>Product Link</label><input type="text" name="prodlink" id="prodlink" size='85'  value="<?php echo isset($page_values['prodlink']) ? stripslashes(htmlentities($page_values['prodlink'])) : '' ; ?>" /><br>
                 <label>Title</label><input type="text" name="title" id="title" size='85'  value="<?php echo isset($page_values['title']) ? $page_values['title'] : '' ; ?>" /><br>
                 <label>Author</label><input type="text" name="author" id="author" size='85'  value="<?php echo isset($page_values['author']) ? $page_values['author'] : '' ; ?>" /><br>
-                <label>Release Date</label><input type="text" name="release_date" id="release_date" value="<?php echo isset($page_values['release_date']) ? $fw->MySQLToDate($page_values['release_date']) : '' ; ?>" /><br>
+                <label>Release Date</label><input type="text" name="release_date" id="release_date" value="<?php echo isset($page_values['release_date']) ? ($page_values['release_date']) : '' ; ?>" /><br>
                 <label>Week Spent #1</label><input type="text" name="wk_spent" id="wk_spent" value="<?php echo isset($page_values['wk_spent']) ? $page_values['wk_spent'] : '' ; ?>" /><br>
                 <label>Content</label><br>
                 <textarea id="content" name="content" rows="50"><?php echo isset($page_values['nav_tag']) ? $page_values['nav_tag'] : '' ; ?></textarea>

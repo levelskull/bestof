@@ -12,7 +12,7 @@ $sql->Open();
 if ($sql->HasErr)
    die("Unable to open sql :: ".$sql->ErrMsg);
 
-$query = "SELECT seq FROM bestof.post_type where name != 'Feature' order by ord; ";
+$query = "SELECT seq FROM post_type where name != 'Feature' order by ord; ";
 $sql->Query($query);
 if ($sql->HasErr)
    die("Unable to query sql :: ".$sql->ErrMsg);
@@ -34,7 +34,7 @@ if ($sql->HasErr)
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-            <link href='../bestof/main.css' rel='stylesheet' type='text/css'>
+            <link href='main.css' rel='stylesheet' type='text/css'>
         
     </head>
     <body>
@@ -57,9 +57,9 @@ Eum reque convenire at. Ne graece praesent neglegentur duo, ex error omittam nam
 <?php while ($row = $sql->NextRecord()) { ?>
             <article>
                 
-                <header>#1 Single</header>
+                <header><?php echo $row['post_name'] != '' ? $row['post_name'] : ''; ?> </header>
                 <div class='prodBox'>
-                    <?php echo $row['prodlink']; ?>
+                    <?php echo stripslashes($row['prodlink']); ?>
                 </div>
                 <div class='infoBox'>
                     <?php echo $row['title'] != '' ? $row['title'].'<br>' : ''; ?>
@@ -67,13 +67,13 @@ Eum reque convenire at. Ne graece praesent neglegentur duo, ex error omittam nam
                     <?php echo $row['release_date'] != '' ? '<label>Release Date:</label>'.$row['release_date'].'<br>' : ''; ?>
                     <?php echo $row['wk_spent'] != '' ? '<label>Weeks Spent at #1:</label>'.$row['wk_spent'].'<br>' : ''; ?>
                     <br>
-                    Get it here :
+                    <!--Get it here :
                     <ul>
                         <li>Amazon</li>
                         <li>iTunes</li>
                         <li>Google Play</li>
                     </ul>       
-                    <br>
+                    <br>-->
                 </div>
                 
                 
