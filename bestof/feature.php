@@ -18,10 +18,15 @@ if ($sql->HasErr)
    die("Unable to query sql :: ".$sql->ErrMsg);
 
 $content_query = '';
-while($row = $sql->NextRecord())
+for ($y = $__begyear; $y<=$__endyear; $y++)
 {
-    $content_query .= ($content_query != '' ? " union all " : '')."select * from (select * from besttoday where post_type = ".$row['seq']." and showdte <= '".$today."' and yr between ".$__begyear." and ".$__endyear." order by showdte desc limit 1) as a".$row['seq'];    
+    while($row = $sql->NextRecord())
+    {
+        $content_query .= ($content_query != '' ? " union all " : '')."select * from (select * from besttoday where post_type = ".$row['seq']." and showdte <= '".$today."' and yr = ".$y." order by showdte desc limit 1) as a".$y.$row['seq'];    
+    }
+    $sql->GotoRec(0);
 }
+//die($content_query);
 
 $sql->Query($content_query);
 if ($sql->HasErr)
@@ -53,8 +58,14 @@ Eum reque convenire at. Ne graece praesent neglegentur duo, ex error omittam nam
         </section>-->
         <!--<nav>Toys Games Movies TV Music</nav>-->
         <section>
-            <header>On this Day : <?php echo date("F j, Y"); ?></header>
-<?php while ($row = $sql->NextRecord()) { ?>
+            
+<?php 
+$yr = '';
+while ($row = $sql->NextRecord()) 
+{ ?>
+            <?php if ($yr != $row['yr']) { $yr = $row['yr']; ?>
+            <header><?php echo $row['yr']; ?></header>
+            <?php } ?>
             <article>
                 
                 <header><?php echo $row['post_name'] != '' ? $row['post_name'] : ''; ?> </header>
@@ -62,9 +73,9 @@ Eum reque convenire at. Ne graece praesent neglegentur duo, ex error omittam nam
                     <?php echo stripslashes($row['prodlink']); ?>
                 </div>
                 <div class='infoBox'>
-                    <?php echo $row['title'] != '' ? $row['title'].'<br>' : ''; ?>
-                    <?php echo $row['author'] != '' ? $row['author'].'<br>' : ''; ?><br>
-                    <?php echo $row['release_date'] != '' ? '<label>Release Date:</label>'.$row['release_date'].'<br>' : ''; ?>
+                    <?php echo $row['title'] != '' ? stripslashes($row['title']).'<br>' : ''; ?>
+                    <?php echo $row['author'] != '' ? stripslashes($row['author']).'<br>' : ''; ?><br>
+                    <?php echo $row['release_date'] != '0000-00-00' ? '<label>Release Date:</label>'.$row['release_date'].'<br>' : ''; ?>
                     <?php echo $row['wk_spent'] != '' ? '<label>Weeks Spent at #1:</label>'.$row['wk_spent'].'<br>' : ''; ?>
                     <br>
                     <!--Get it here :

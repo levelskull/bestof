@@ -1,1 +1,1 @@
-<header id='pageHeader'>Best of the 1980's</header>
+<header id='pageHeader'>Best of the 1980's :: On this Day : <?php echo date("F j"); ?></header>

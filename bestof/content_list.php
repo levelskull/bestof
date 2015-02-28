@@ -45,11 +45,25 @@ if($sql->HasErr)
             <table>
                 <tr>
                     <th>Edit</th>
-                    <th>Order</th>
-                    <th>Name</th>
+                    
+                    <th>Year</th>
+                    <th>Show</th>
+                    <th>Post Type</th>
+                    <th>Title</th>
                 </tr>
                 <?php
-                    $query = "select seq, post_type, title from content order by title";
+                    $query = "select 
+                                    content.seq, 
+                                    post_on.showdte, 
+                                    post_on.yr, 
+                                    post_type.name as posttype, 
+                                    title 
+                                from 
+                                    content 
+                                    left join 
+                                    post_type on post_type.seq = content.post_type 
+                                    left join post_on on post_on.content_seq = content.seq 
+                               order by content.seq desc ";
                     $sql->Query($query);
                     if($sql->HasErr)
                         die("Unable to query [01] :: ".$sql->ErrMsg);
@@ -58,7 +72,9 @@ if($sql->HasErr)
                     {
                         echo "<tr>";
                         echo '<td><a href="content.php?edit='.$row['seq'].'">Edit</a></td>';
-                        echo "<td>".$row['post_type']."</td>";
+                        echo "<td>".$row['yr']."</td>";
+                        echo "<td>".$row['showdte']."</td>";
+                        echo "<td>".$row['posttype']."</td>";
                         echo "<td>".$row['title']."</td>";
                         echo "</tr>";
                         

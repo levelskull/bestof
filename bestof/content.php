@@ -14,14 +14,20 @@ $_table = "content";
 $form = new Form($sql);                                             // form class
 $fw = new FrameWork();
 
-if (isset($_POST['Submit']))
+if (isset($_POST['Submit']) or isset($_POST['AddPost']))
 {
+    if (isset($_POST['AddPost']))
+    {
+        $_table = "post_on";
+    }
+    
     $save = new InsertStatementMYSQL($fw);     // new insert on duplicate update statement
-    $save->Ignore(array('Submit'));      // values to ignore
+    $save->Ignore(array('Submit','AddPost'));      // values to ignore
     //$save->Date(array('release_date')); // dates
     $save->Table($_table);                     // table name -> top
     $save->Key($_key);                         // primmary key -> top
     $insert = $save->CreateInsert($_POST);               // get the insert statement
+    //die($insert);
     $nbr = $form->Save($insert);
     if ($form->Error['HasError'])
         die($form->Error['Message']);
@@ -70,7 +76,7 @@ if($sql->HasErr)
     <body>
         <a href="content_list.php">List</a><br>
         <div id="content">
-            <form name="login" action="" method="post">
+            <form name="content" action="" method="post">
                 <input type="hidden" name="seq" id="seq" value="<?php echo isset($page_values['seq']) ? $page_values['seq'] : '' ; ?>" /><br>
                 <label>Post Type</label> <select name="post_type" id="post_type">
                   <?php echo $fw->InputSelect("SELECT name as title, seq as value  FROM post_type;",isset($page_values['post_type']) ? $page_values['post_type'] : '',$sql); ?>
@@ -79,16 +85,17 @@ if($sql->HasErr)
                   <?php echo $fw->InputSelect("SELECT name as title, seq as value  FROM nav_tag;",isset($page_values['nav_tag']) ? $page_values['nav_tag'] : '',$sql); ?>
             </select><br>
             
-            <label>Year (YYYY)</label><input type="text" name="yr" id="yr" value="<?php echo isset($page_values['yr']) ? $page_values['yr'] : '' ; ?>" /><br>
+            <!--<label>Year (YYYY)</label><input type="text" name="yr" id="yr" value="<?php echo isset($page_values['yr']) ? $page_values['yr'] : '' ; ?>" /><br>
             <label>Post Date (MMDD)</label><input type="text" name="showdte" id="showdte" value="<?php echo isset($page_values['showdte']) ? $page_values['showdte'] : '' ; ?>" /><br>
-            
-                <label>Product Link</label><input type="text" name="prodlink" id="prodlink" size='85'  value="<?php echo isset($page_values['prodlink']) ? stripslashes(htmlentities($page_values['prodlink'])) : '' ; ?>" /><br>
+            -->
+                <label>Product Link</label><br>
+                <label>&nbsp;</label><textarea name="prodlink" id="prodlink" rows="10" cols="50"><?php echo isset($page_values['prodlink']) ? stripslashes(htmlentities($page_values['prodlink'])) : '' ; ?></textarea> <br>
                 <label>Title</label><input type="text" name="title" id="title" size='85'  value="<?php echo isset($page_values['title']) ? $page_values['title'] : '' ; ?>" /><br>
                 <label>Author</label><input type="text" name="author" id="author" size='85'  value="<?php echo isset($page_values['author']) ? $page_values['author'] : '' ; ?>" /><br>
                 <label>Release Date</label><input type="text" name="release_date" id="release_date" value="<?php echo isset($page_values['release_date']) ? ($page_values['release_date']) : '' ; ?>" /><br>
                 <label>Week Spent #1</label><input type="text" name="wk_spent" id="wk_spent" value="<?php echo isset($page_values['wk_spent']) ? $page_values['wk_spent'] : '' ; ?>" /><br>
                 <label>Content</label><br>
-                <textarea id="content" name="content" rows="50"><?php echo isset($page_values['nav_tag']) ? $page_values['nav_tag'] : '' ; ?></textarea>
+                <label>&nbsp;</label><textarea id="content" name="content" rows="10" cols="50"><?php echo isset($page_values['content']) ? $page_values['content'] : '' ; ?></textarea>
                     
                 <br>
                 <label>&nbsp;</label><input type="submit" name="Submit" id="Submit" />
@@ -97,7 +104,43 @@ if($sql->HasErr)
             
         </div>
 <?php if (isset($page_values['seq'])) { ?>            
-            <div id="data">
+         
+ <br><br>       <div id="data">
+            <form name="post_on" action="" method="post">
+                <input type="hidden" name="seq" id="seq" value="<?php echo isset($post_on['seq']) ? $post_on['seq'] : '' ; ?>" />
+                <input type="hidden" name="content_seq" id="content_seq" value="<?php echo isset($post_on['content_seq']) ? $post_on['content_seq'] : $page_values['seq'] ; ?>" /><br>
+            <label>Year (YYYY)</label><input type="text" name="yr" id="yr" value="<?php echo isset($post_on['yr']) ? $post_on['yr'] : '' ; ?>" /><br>
+            <label>Post Date (MMDD)</label><input type="text" name="showdte" id="showdte" value="<?php echo isset($post_on['showdte']) ? $post_on['showdte'] : '' ; ?>" /><br>
+            <label>&nbsp;</label><input type="submit" name="AddPost" id="AddPost" />
+            </form>
+
+            <table>
+                <tr>
+                    <th>Edit</th>
+                    <th>Year</th>
+                    <th>Show Date</th>
+                    
+                </tr>
+                <?php
+                    $query = "select * from post_on where content_seq = ".$page_values['seq']." order by yr, showdte";
+                    $sql->Query($query);
+                    if($sql->HasErr)
+                        die("Unable to query [01] :: ".$sql->ErrMsg);
+                    
+                    while ($row = $sql->NextRecord())
+                    {
+                        echo "<tr>";
+                        //echo '<td><a href="content.php?edit='.$row['seq'].'">Edit</a></td>';
+                        echo "<td>".$row['yr']."</td>";       
+                        echo "<td>".$row['showdte']."</td>";  
+                        echo "</tr>";
+                        
+                    }
+                ?>
+            </table>
+        </div>
+        <br><br>
+         <div id="data">
                 <a href="add_pur.php?content_seq=<?php echo $page_values['seq'];?>">Add Purchase</a>
             <table>
                 <tr>
