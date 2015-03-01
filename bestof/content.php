@@ -16,9 +16,16 @@ $fw = new FrameWork();
 
 if (isset($_POST['Submit']) or isset($_POST['AddPost']))
 {
+    $edit = '';
     if (isset($_POST['AddPost']))
     {
         $_table = "post_on";
+        $edit = $_POST["content_seq"];
+    }
+    
+    if (isset($_POST['Submit']))
+    {
+        $edit = $_POST["seq"] != '' ? $_POST["seq"] : '';
     }
     
     $save = new InsertStatementMYSQL($fw);     // new insert on duplicate update statement
@@ -31,7 +38,8 @@ if (isset($_POST['Submit']) or isset($_POST['AddPost']))
     $nbr = $form->Save($insert);
     if ($form->Error['HasError'])
         die($form->Error['Message']);
-    header("location:content_list.php");
+    
+    header("location:content.php?edit=".($edit != '' ? $edit : $nbr));
 }
 
 if (isset($_REQUEST['edit']))

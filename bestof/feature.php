@@ -12,7 +12,7 @@ $sql->Open();
 if ($sql->HasErr)
    die("Unable to open sql :: ".$sql->ErrMsg);
 
-$query = "SELECT seq FROM post_type where name != 'Feature' order by ord; ";
+$query = "SELECT seq FROM post_type where name != 'Feature' and name != 'Events' order by ord; ";
 $sql->Query($query);
 if ($sql->HasErr)
    die("Unable to query sql :: ".$sql->ErrMsg);
@@ -25,7 +25,9 @@ for ($y = $__begyear; $y<=$__endyear; $y++)
         $content_query .= ($content_query != '' ? " union all " : '')."select * from (select * from besttoday where post_type = ".$row['seq']." and showdte <= '".$today."' and yr = ".$y." order by showdte desc limit 1) as a".$y.$row['seq'];    
     }
     $sql->GotoRec(0);
+    $content_query .= " union all select * from (select * from besttoday where post_name = 'Events' and showdte = '".$today."' and yr = ".$y." order by showdte ) as a".$y.'Events'; 
 }
+
 //die($content_query);
 
 $sql->Query($content_query);
@@ -38,7 +40,7 @@ if ($sql->HasErr)
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+            <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
             <link href='main.css' rel='stylesheet' type='text/css'>
         
     </head>
@@ -61,22 +63,25 @@ Eum reque convenire at. Ne graece praesent neglegentur duo, ex error omittam nam
             
 <?php 
 $yr = '';
+$post_name = '';
 while ($row = $sql->NextRecord()) 
 { ?>
-            <?php if ($yr != $row['yr']) { $yr = $row['yr']; ?>
+            <?php if ($yr != $row['yr']) {  ?>
             <header><?php echo $row['yr']; ?></header>
             <?php } ?>
             <article>
-                
+                <?php if ($yr != $row['yr'] or $post_name != $row['post_name']) { ?>
                 <header><?php echo $row['post_name'] != '' ? $row['post_name'] : ''; ?> </header>
+                <?php } ?>
                 <div class='prodBox'>
-                    <?php echo stripslashes($row['prodlink']); ?>
+                    <?php echo $row['prodlink'] != '' ? stripslashes($row['prodlink']) : ''; ?>
                 </div>
                 <div class='infoBox'>
                     <?php echo $row['title'] != '' ? stripslashes($row['title']).'<br>' : ''; ?>
                     <?php echo $row['author'] != '' ? stripslashes($row['author']).'<br>' : ''; ?><br>
                     <?php echo $row['release_date'] != '0000-00-00' ? '<label>Release Date:</label>'.$row['release_date'].'<br>' : ''; ?>
-                    <?php echo $row['wk_spent'] != '' ? '<label>Weeks Spent at #1:</label>'.$row['wk_spent'].'<br>' : ''; ?>
+                    <?php echo $row['wk_spent'] != '0' ? '<label>Weeks Spent at #1:</label>'.$row['wk_spent'].'<br>' : ''; ?>
+                    <?php echo $row['content'] != '' ? $row['content'].'<br>' : ''; ?>
                     <br>
                     <!--Get it here :
                     <ul>
@@ -89,7 +94,11 @@ while ($row = $sql->NextRecord())
                 
                 
             </article>
-<?php } ?>
+<?php 
+$yr = $row['yr'];
+$post_name = $row['post_name'];
+
+                } ?>
         </section>
         <?php include_once("footer.php"); ?>
     </body>

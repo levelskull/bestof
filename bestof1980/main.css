@@ -11,8 +11,9 @@ root {
 }
 body
 {
-    font-family: 'Open Sans', sans-serif;
-    width: 768px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5em;
+    width: 970px;
     margin-right: auto;
     margin-left: auto;
     background-color: #F1F1F1;
@@ -23,9 +24,8 @@ body
 {
     font-size: 1em;
     text-align: right;
-    border-bottom: 1px #00FF00  solid;
+    border-bottom: 1px #888888  solid;
     height:1.25em;
-
 }
 #pageFooter
 {
@@ -40,33 +40,37 @@ nav
 }
 section
 {
-
-    padding:5px;
-    margin:5px;
-
+        padding:5px;
+    
 }
 section header
 {
     font-size: 3em;
-    color:#AAAAAA;
+    margin-top: 20px;
+    text-shadow: 7px 7px 10px #888888;
 
 }
 article
 {
-    border-bottom: 1px #FF3300 solid;
+    /*border-bottom: 1px #FF3300 solid;*/
+    border: 5px whitesmoke solid;
+    box-shadow: 10px 10px 5px #888888;
     padding:5px;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 article header
 {
     font-size: 1.5em;
     text-decoration: none;
     margin-bottom: 10px;
+    margin-top: -10px;
+    text-shadow: none;
 }
 article .infoBox
 {
     margin-left: 10px;
-    width:285px;
+    width:500px;
     float:left;
 }
 article .prodBox
@@ -78,7 +82,7 @@ article .prodBox
 }
 label
 {
-    width:150px;
+    width:225px;
     display:block;
     text-align: right;
     float: left;
