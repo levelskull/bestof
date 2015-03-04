@@ -119,6 +119,8 @@ if($sql->HasErr)
                 <input type="hidden" name="content_seq" id="content_seq" value="<?php echo isset($post_on['content_seq']) ? $post_on['content_seq'] : $page_values['seq'] ; ?>" /><br>
             <label>Year (YYYY)</label><input type="text" name="yr" id="yr" value="<?php echo isset($post_on['yr']) ? $post_on['yr'] : '' ; ?>" /><br>
             <label>Post Date (MMDD)</label><input type="text" name="showdte" id="showdte" value="<?php echo isset($post_on['showdte']) ? $post_on['showdte'] : '' ; ?>" /><br>
+            <label>Event</label><br>
+                <label>&nbsp;</label><textarea id="note" name="note" rows="10" cols="50"><?php echo isset($post_on['note']) ? $post_on['note'] : '' ; ?></textarea>
             <label>&nbsp;</label><input type="submit" name="AddPost" id="AddPost" />
             </form>
 
@@ -127,7 +129,7 @@ if($sql->HasErr)
                     <th>Edit</th>
                     <th>Year</th>
                     <th>Show Date</th>
-                    
+                    <th>Event</th>
                 </tr>
                 <?php
                     $query = "select * from post_on where content_seq = ".$page_values['seq']." order by yr, showdte";
@@ -141,6 +143,7 @@ if($sql->HasErr)
                         //echo '<td><a href="content.php?edit='.$row['seq'].'">Edit</a></td>';
                         echo "<td>".$row['yr']."</td>";       
                         echo "<td>".$row['showdte']."</td>";  
+                        echo "<td>".$row['note']."</td>"; 
                         echo "</tr>";
                         
                     }

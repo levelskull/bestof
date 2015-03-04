@@ -25,7 +25,7 @@ for ($y = $__begyear; $y<=$__endyear; $y++)
         $content_query .= ($content_query != '' ? " union all " : '')."select * from (select * from besttoday where post_type = ".$row['seq']." and showdte <= '".$today."' and yr = ".$y." order by showdte desc limit 1) as a".$y.$row['seq'];    
     }
     $sql->GotoRec(0);
-    $content_query .= " union all select * from (select * from besttoday where post_name = 'Events' and showdte = '".$today."' and yr = ".$y." order by showdte ) as a".$y.'Events'; 
+    $content_query .= " union all select * from (select * from besttoday where post_name = 'Feature' and showdte = '".$today."' and yr = ".$y." order by showdte ) as a".$y.'Events'; 
 }
 
 //die($content_query);
