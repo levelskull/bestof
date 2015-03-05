@@ -67,6 +67,7 @@ if($sql->HasErr)
         <title></title>
     </head>
     <body>
+        <?php include_once("main.php"); ?>
         <a href="navtype.php">Add</a><br>
         <div id="content">
             <form name="login" action="" method="post">

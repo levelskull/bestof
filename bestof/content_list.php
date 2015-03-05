@@ -48,6 +48,7 @@ if($sql->HasErr)
         <title></title>
     </head>
     <body>
+        <?php include_once("main.php"); ?>
         <a href="content.php">Add</a><br>
         
         <div id="data">

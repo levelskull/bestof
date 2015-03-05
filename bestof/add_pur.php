@@ -67,7 +67,7 @@ if($sql->HasErr)
         <title></title>
     </head>
     <body>
-        
+        <?php include_once("main.php"); ?>
         <div id="content">
             <form name="login" action="" method="post">
                 <input type="hidden" name="seq" id="seq" value="<?php echo isset($page_values['seq']) ? $page_values['seq'] : '' ; ?>" /><br>

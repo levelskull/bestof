@@ -82,6 +82,7 @@ if($sql->HasErr)
         <title></title>
     </head>
     <body>
+        <?php include_once("main.php"); ?>
         <a href="content_list.php">List</a><br>
         <div id="content">
             <form name="content" action="" method="post">
@@ -119,8 +120,11 @@ if($sql->HasErr)
                 <input type="hidden" name="content_seq" id="content_seq" value="<?php echo isset($post_on['content_seq']) ? $post_on['content_seq'] : $page_values['seq'] ; ?>" /><br>
             <label>Year (YYYY)</label><input type="text" name="yr" id="yr" value="<?php echo isset($post_on['yr']) ? $post_on['yr'] : '' ; ?>" /><br>
             <label>Post Date (MMDD)</label><input type="text" name="showdte" id="showdte" value="<?php echo isset($post_on['showdte']) ? $post_on['showdte'] : '' ; ?>" /><br>
-            <label>Event</label><br>
-                <label>&nbsp;</label><textarea id="note" name="note" rows="10" cols="50"><?php echo isset($post_on['note']) ? $post_on['note'] : '' ; ?></textarea>
+            <label>Link</label>
+            <textarea id="info_link" name="info_link" rows="10" cols="50"><?php echo isset($post_on['info_link']) ? $post_on['info_link'] : '' ; ?></textarea><br>
+            <label>Event</label>
+            <textarea id="note" name="note" rows="10" cols="50"><?php echo isset($post_on['note']) ? $post_on['note'] : '' ; ?></textarea>
+            <br>
             <label>&nbsp;</label><input type="submit" name="AddPost" id="AddPost" />
             </form>
 

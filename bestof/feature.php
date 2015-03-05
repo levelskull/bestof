@@ -22,10 +22,10 @@ for ($y = $__begyear; $y<=$__endyear; $y++)
 {
     while($row = $sql->NextRecord())
     {
-        $content_query .= ($content_query != '' ? " union all " : '')."select * from (select * from besttoday where post_type = ".$row['seq']." and showdte <= '".$today."' and yr = ".$y." order by showdte desc limit 1) as a".$y.$row['seq'];    
+        $content_query .= ($content_query != '' ? " union all " : '')."select post_name, prodlink, title, author, release_date, wk_spent, content, showdte,yr from (select * from besttoday where post_type = ".$row['seq']." and showdte <= '".$today."' and yr = ".$y." order by showdte desc limit 1) as a".$y.$row['seq'];    
     }
     $sql->GotoRec(0);
-    $content_query .= " union all select * from (select * from besttoday where post_name = 'Feature' and showdte = '".$today."' and yr = ".$y." order by showdte ) as a".$y.'Events'; 
+    $content_query .= " union all select 'Event' as post_name, post_on_link as prodlink, '' as title, author, release_date, 0 as wk_spent, post_note as content, showdte,yr from (select * from besttoday where post_name = 'Feature' and showdte = '".$today."' and yr = ".$y." order by showdte ) as a".$y.'Events'; 
 }
 
 //die($content_query);
