@@ -21,6 +21,8 @@ if (isset($_POST['Submit']) or isset($_POST['AddPost']))
     {
         $_table = "post_on";
         $edit = $_POST["content_seq"];
+        $_POST['showdte'] = $_POST['month'].$_POST['day'];
+        $_COOKIE['show_year'] = $_POST['yr'];
     }
     
     if (isset($_POST['Submit']))
@@ -29,7 +31,7 @@ if (isset($_POST['Submit']) or isset($_POST['AddPost']))
     }
     
     $save = new InsertStatementMYSQL($fw);     // new insert on duplicate update statement
-    $save->Ignore(array('Submit','AddPost'));      // values to ignore
+    $save->Ignore(array('Submit','AddPost','month','day'));      // values to ignore
     //$save->Date(array('release_date')); // dates
     $save->Table($_table);                     // table name -> top
     $save->Key($_key);                         // primmary key -> top
@@ -118,8 +120,37 @@ if($sql->HasErr)
             <form name="post_on" action="" method="post">
                 <input type="hidden" name="seq" id="seq" value="<?php echo isset($post_on['seq']) ? $post_on['seq'] : '' ; ?>" />
                 <input type="hidden" name="content_seq" id="content_seq" value="<?php echo isset($post_on['content_seq']) ? $post_on['content_seq'] : $page_values['seq'] ; ?>" /><br>
-            <label>Year (YYYY)</label><input type="text" name="yr" id="yr" value="<?php echo isset($post_on['yr']) ? $post_on['yr'] : '' ; ?>" /><br>
-            <label>Post Date (MMDD)</label><input type="text" name="showdte" id="showdte" value="<?php echo isset($post_on['showdte']) ? $post_on['showdte'] : '' ; ?>" /><br>
+            <label>Year (YYYY)</label><input type="text" name="yr" id="yr" value="<?php echo isset($post_on['yr']) ? $post_on['yr'] : isset($_COOKIE['show_year']) ? $_COOKIE['show_year'] : '' ; ?>" /><br>
+            <label>Post Date (MMDD)</label>
+            
+            <select id="month" name="month">
+               
+                <?php
+                    for($i=1;$i<=12;$i++)
+                    {
+                        echo '<option value="'.str_pad($i,2,'0',STR_PAD_LEFT).'">'. date('F',strtotime('2015-'.str_pad($i,2,'0',STR_PAD_LEFT).'-01')).' ('.str_pad($i,2,'0',STR_PAD_LEFT).')</option>';
+                    }
+                ?>
+                
+                
+            </select>
+            
+            
+            <select id="day" name="day">
+               
+                <?php
+                    for($i=1;$i<=31;$i++)
+                    {
+                        echo '<option value="'.str_pad($i,2,'0',STR_PAD_LEFT).'">'.str_pad($i,2,'0',STR_PAD_LEFT).'</option>';
+                    }
+                ?>
+                
+                
+            </select>
+            
+            
+            <!--<input type="text" name="showdte" id="showdte" value="<?php //echo isset($post_on['showdte']) ? $post_on['showdte'] : '' ; ?>" />-->
+            <br>
             <label>Link</label>
             <textarea id="info_link" name="info_link" rows="10" cols="50"><?php echo isset($post_on['info_link']) ? $post_on['info_link'] : '' ; ?></textarea><br>
             <label>Event</label>
