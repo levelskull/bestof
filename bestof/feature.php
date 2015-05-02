@@ -12,7 +12,7 @@ $sql->Open();
 if ($sql->HasErr)
    die("Unable to open sql :: ".$sql->ErrMsg);
 
-$query = "SELECT seq FROM post_type where name != 'Feature' and name != 'Events' order by ord; ";
+$query = "SELECT seq FROM post_type where noshow != 'Y' order by ord; ";
 $sql->Query($query);
 if ($sql->HasErr)
    die("Unable to query sql :: ".$sql->ErrMsg);

@@ -67,13 +67,14 @@ if($sql->HasErr)
         <title></title>
     </head>
     <body>
-        <?php include_once("main.php"); ?>
+        <?php include_once("nav_bar.php"); ?>
         <a href="posttype.php">Add</a><br>
         <div id="content">
             <form name="login" action="" method="post">
                 <input type="hidden" name="seq" id="seq" value="<?php echo isset($page_values['seq']) ? $page_values['seq'] : '' ; ?>" /><br>
                 <label>Order</label><input type="text" name="ord" id="ord" value="<?php echo isset($page_values['ord']) ? $page_values['ord'] : '' ; ?>" /><br>
                 <label>Name</label><input type="text" name="name" id="name" value="<?php echo isset($page_values['name']) ? $page_values['name'] : '' ; ?>" /><br>
+                <label>No Show on List</label><input type="text" name="noshow" id="noshow" value="<?php echo isset($page_values['noshow']) ? $page_values['noshow'] : '' ; ?>" /><br>
                 <label>&nbsp;</label><input type="submit" name="Submit" id="Submit" />
             </form>
         </div>
@@ -96,6 +97,7 @@ if($sql->HasErr)
                         echo '<td><a href="?edit='.$row['seq'].'">Edit</a></td>';
                         echo "<td>".$row['ord']."</td>";
                         echo "<td>".$row['name']."</td>";
+                        echo "<td>".$row['noshow']."</td>";
                         echo "</tr>";
                         
                     }

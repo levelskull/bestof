@@ -84,7 +84,7 @@ if($sql->HasErr)
         <title></title>
     </head>
     <body>
-        <?php include_once("main.php"); ?>
+        <?php include_once("nav_bar.php"); ?>
         <a href="content_list.php">List</a><br>
         <div id="content">
             <form name="content" action="" method="post">
