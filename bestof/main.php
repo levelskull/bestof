@@ -111,6 +111,8 @@ if($sql->HasErr)
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Main</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <style> 
         #content, #data
@@ -122,29 +124,37 @@ if($sql->HasErr)
         }
         label
             {
-                width:200px;
+                width:100px;
                 display:block;
                 text-align: right;
                 float: left;
                 padding-right: 10px;
             }
+            .quickaddBlock
+            {
+                width:300px;
+                margin:auto;
+                padding:5px;
+                border:solid thin #000;
+                margin-bottom:10px;
+                
+            }
         </style>
-        <title></title>
+        
     </head>
     <body>
         <?php include_once("nav_bar.php"); ?>
-        <a href="content_list.php">List</a><br>
-        <br>
-        <br>
-        <div id="movie">
+     
+        <div id="movie" class="quickaddBlock">
             <form name="movie" action="" method="post">
                 
                 Quick Add Movie<br>
                 <input type="hidden" name="quickadd" id="quickadd" value="movie"/>
-                Title <input type="text" name="title" id="title" size="50" value="<?php echo isset($page_values['title']) ? $page_values['title'] : '' ; ?>" />
-                Week Spent #1 <input type="text" name="wk_spent" id="wk_spent" size="5" value="<?php echo isset($page_values['wk_spent']) ? $page_values['wk_spent'] : '' ; ?>" />
+                <label>Title</label> <input type="text" name="title" id="title" size="25" value="<?php echo isset($page_values['title']) ? $page_values['title'] : '' ; ?>" />
+                <br><label>Week Spent #1</label> <input type="text" name="wk_spent" id="wk_spent" size="5" value="<?php echo isset($page_values['wk_spent']) ? $page_values['wk_spent'] : '' ; ?>" />
                 
-            
+            <br>
+                <label>&nbsp;</label>
             <select id="month" name="month">
                
                 <?php
@@ -157,7 +167,7 @@ if($sql->HasErr)
                 
             </select>
             
-            
+            <br><label> &nbsp;</label>
             <select id="day" name="day">
                
                 <?php
@@ -169,6 +179,7 @@ if($sql->HasErr)
                 
                 
             </select>
+                <br><label> &nbsp;</label>
                  <select id="yr" name="yr">
                
                 <?php
@@ -180,24 +191,24 @@ if($sql->HasErr)
                 
                 
             </select>
-                
-                
+                <br>
+                <label> &nbsp;</label>
                 <input type="submit" name="Submit" id="Submit" />
             </form>
 
             
         </div>
         
-        <div id="book">
+        <div id="book" class="quickaddBlock">
             <form name="book" action="" method="post">
                 
                 Quick Add Book<br>
                 <input type="hidden" name="quickadd" id="quickadd" value="book"/>
-                Title <input type="text" name="title" id="title" size="50" value="<?php echo isset($page_values['title']) ? $page_values['title'] : '' ; ?>" />
-                Author <input type="text" name="author" id="author" size="50" value="<?php echo isset($page_values['author']) ? $page_values['author'] : '' ; ?>" />
-                Week Spent #1 <input type="text" name="wk_spent" id="wk_spent" size="5" value="<?php echo isset($page_values['wk_spent']) ? $page_values['wk_spent'] : '' ; ?>" />
+                <br><label>Title</label><input type="text" name="title" id="title" size="25" value="<?php echo isset($page_values['title']) ? $page_values['title'] : '' ; ?>" />
+                <br><label>Author</label><input type="text" name="author" id="author" size="25" value="<?php echo isset($page_values['author']) ? $page_values['author'] : '' ; ?>" />
+                <br><label>Week Spent #1</label><input type="text" name="wk_spent" id="wk_spent" size="5" value="<?php echo isset($page_values['wk_spent']) ? $page_values['wk_spent'] : '' ; ?>" />
                 
-            
+            <br><label>&nbsp;</label>
             <select id="month" name="month">
                
                 <?php
@@ -210,7 +221,7 @@ if($sql->HasErr)
                 
             </select>
             
-            
+            <br><label>&nbsp;</label>
             <select id="day" name="day">
                
                 <?php
@@ -221,7 +232,7 @@ if($sql->HasErr)
                 ?>
                 
                 
-            </select>
+            </select><br><label>&nbsp;</label>
                  <select id="yr" name="yr">
                
                 <?php
@@ -234,7 +245,7 @@ if($sql->HasErr)
                 
             </select>
                 
-                
+                <br><label>&nbsp;</label>
                 <input type="submit" name="Submit" id="Submit" />
             </form>
 

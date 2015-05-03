@@ -4,7 +4,7 @@ include_once("security.php");       // check to see if the user is logged in
 
 <style>
     #admin_nav ul li { display: inline; padding-left: 10px; text-justify: center; widht: 100%; }
-    
+    #admin_nav {width:500px; margin:auto;}
 </style>
 
 <div id="admin_nav">

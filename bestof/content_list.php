@@ -19,7 +19,7 @@ if($sql->HasErr)
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
         <link href='http://cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css' />
@@ -45,13 +45,14 @@ if($sql->HasErr)
                 padding-right: 10px;
             }
         </style>
-        <title></title>
+        <title>Content</title>
     </head>
     <body>
         <?php include_once("nav_bar.php"); ?>
-        <a href="content.php">Add</a><br>
+        
         
         <div id="data">
+            <a href="content.php">Add</a><br><br>
             <table id="myTable"class="display" cellspacing="0" width="100%">
                 <thead>
                 <tr>
