@@ -12,7 +12,7 @@ $sql->Open();
 if ($sql->HasErr)
    die("Unable to open sql :: ".$sql->ErrMsg);
 
-$query = "SELECT seq FROM post_type where noshow != 'Y' order by ord; ";
+$query = "SELECT seq FROM post_type where name != 'Feature' and name != 'Events'  order by ord;   "; //-- noshow != 'Y'
 $sql->Query($query);
 if ($sql->HasErr)
    die("Unable to query sql :: ".$sql->ErrMsg);
@@ -38,11 +38,11 @@ if ($sql->HasErr)
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Best Of 1980</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
             <link href='main.css' rel='stylesheet' type='text/css'>
-        
+        <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
     </head>
     <body>
         <?php include_once("header.php") ?>
@@ -67,7 +67,7 @@ $post_name = '';
 while ($row = $sql->NextRecord()) 
 { ?>
             <?php if ($yr != $row['yr']) {  ?>
-            <header><?php echo $row['yr']; ?></header>
+            <header><?php echo date("F j").', '.$row['yr']; ?></header>
             <?php } ?>
             <article>
                 <?php if ($yr != $row['yr'] or $post_name != $row['post_name']) { ?>
@@ -101,5 +101,9 @@ $post_name = $row['post_name'];
                 } ?>
         </section>
         <?php include_once("footer.php"); ?>
+        
+
+
+        
     </body>
 </html>

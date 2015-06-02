@@ -101,6 +101,14 @@ if (isset($_POST['Submit']) or isset($_POST['quickadd']))
     header("location:main.php");
 }
 
+if (isset($_POST['Missing']))
+{
+    $query = "update content set prodlink = '".$_POST['prodlink']."' where seq = ".$_POST['seq'];
+    $form->Save($query);
+    if ($form->Error['HasError'])
+        die($form->Error['Message']);
+}
+
 
 
 
@@ -139,6 +147,13 @@ if($sql->HasErr)
                 margin-bottom:10px;
                 
             }
+        #missing
+        {
+            width:900px;
+            margin:auto;
+            padding:5px;
+            
+        }
         </style>
         
     </head>
@@ -250,6 +265,50 @@ if($sql->HasErr)
             </form>
 
             
+        </div>
+        
+        <div id="missing">
+            <table>
+            <?php
+            
+                $query = "SELECT content.seq, author as 'Author', title as 'Title', min(post_on.showdte) as 'Show Date' FROM content left join post_on on post_on.content_seq = content.seq where prodlink is null or prodlink = '' group by content.seq order by min(post_on.showdte);";
+                //die($query);
+                $sql->Query($query);
+                $header = true;
+                
+                $cnt = 0;
+                while($row = $sql->NextRecord())
+                {
+                    if ($header)
+                    {
+                        $header = false;
+                        echo '<tr>';
+                        echo '<th>Edit</th>';
+                        foreach($row as $key=>$val)
+                        {
+                            if ($key == 'seq')
+                                continue;
+                            echo '<th>'.$key.'</th>';
+                        }
+                        echo '<th>Product Link</th>';
+                        echo '<th>YouTube</th>';
+                        echo '</tr>';
+                    }
+                    echo '<tr>';
+                    echo '<td><a href="content.php?edit='.$row['seq'].'">Edit</a></td>';
+                    foreach($row as $key=>$val)
+                    {
+                        if ($key == 'seq')
+                                continue;
+                        echo '<td>'.$val.'</td>';
+                    }
+                    echo '<td><form name="missing'.($cnt++).'" action="" method="post"><input type="hidden" id="seq" name = "seq" value="'.$row['seq'].'" /> <textarea id="prodlink" name="prodlink"></textarea><input type="submit" id="Missing" name="Missing" value="Save"/></form></td>';
+                    echo '<td><a href="https://www.youtube.com/results?search_query='.($row['Author'].$row['Title']).'" target="_blank">YouTube</a></td>';
+                    echo '</tr>';
+                }
+                
+            ?>
+            </tabel>
         </div>
       
     </body>
